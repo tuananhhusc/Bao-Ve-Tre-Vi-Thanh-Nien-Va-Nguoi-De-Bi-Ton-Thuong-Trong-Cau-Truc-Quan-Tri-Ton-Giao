@@ -3,6 +3,7 @@
 import { Cross, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { FontSizeControl } from "@/components/FontSizeControl";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,7 +51,8 @@ export function Header() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2.5 sm:gap-3 text-warm-gray shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 text-warm-gray shrink-0">
+            <FontSizeControl />
             <ThemeToggle showLabel={false} />
             <div className="hidden sm:flex items-center gap-1.5 pl-2 sm:border-l border-border-light">
               <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cardinal" />

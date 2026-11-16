@@ -22,7 +22,7 @@ Trang web được thiết kế theo phong cách kết hợp giữa tính **Hàn
    - Khối trích dẫn Kinh Thánh và Huấn quyền (*QuoteBlock*) với viền đỏ đô trang trọng.
 2. **Thanh Mục Lục Cố Định & Bám Vị Trí (Sticky Scroll-Spy TOC)**:
    - Thanh điều hướng chuyên khảo bên trái luôn ghim cố định trên màn hình Desktop, tự động nhận diện và làm nổi bật chương mục đang đọc.
-   - Hỗ trợ đổi cỡ chữ tức thì (A- 15px, A 18px, A+ 20px).
+   - Hỗ trợ đổi cỡ chữ tức thì với 4 cấp độ tiện lợi: A- (16 pixel), A (18 pixel), A+ (21 pixel), A++ (24 pixel), đồng bộ tức thì trên thanh đầu trang, mục lục thanh bên và ngăn kéo di động, tự động lưu vào bộ nhớ trình duyệt.
    - Tự động co gọn thành ngăn kéo trượt (*Drawer*) trên điện thoại di động với nút đóng mở cảm ứng chuẩn 44×44px và khóa cuộn nền.
 3. **Chế Độ Đọc Đêm & Ánh Nến (Dark / Candlelight Mode)**:
    - Chuyển đổi mượt mà giữa chế độ Giấy ngà (*Parchment*) ban ngày và chế độ Ánh nến than chì (*Warm Dark*) ban đêm giúp giảm mỏi mắt.

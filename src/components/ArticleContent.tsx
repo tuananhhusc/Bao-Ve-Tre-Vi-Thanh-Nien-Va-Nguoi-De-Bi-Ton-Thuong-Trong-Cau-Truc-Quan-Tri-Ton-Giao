@@ -8,7 +8,7 @@ import { Shield, BookOpen, Clock, Calendar } from "lucide-react";
 
 export function ArticleContent() {
   return (
-    <article className="w-full max-w-full text-[1.05rem] sm:text-[1.125rem] leading-[1.85] sm:leading-[1.95] font-[family-name:var(--font-lora)] text-charcoal overflow-hidden">
+    <article className="academic-reader w-full max-w-full font-[family-name:var(--font-lora)] text-charcoal overflow-hidden">
       {/* ══════════════════════════════════════════════════════════════
           PHẦN ĐẦU BÁO CÁO (Scholarly Treatise Header)
       ══════════════════════════════════════════════════════════════ */}

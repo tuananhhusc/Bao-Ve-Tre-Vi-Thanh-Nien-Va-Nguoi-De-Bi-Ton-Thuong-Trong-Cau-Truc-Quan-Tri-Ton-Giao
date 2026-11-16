@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { ReadingResume } from "@/components/ReadingResume";
+import { FontSizeProvider } from "@/components/FontSizeContext";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -166,16 +167,36 @@ export default function RootLayout({
     >
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var s = localStorage.getItem("safeguarding-reader-font-size");
+                  if (s) {
+                    document.documentElement.setAttribute("data-font-size", s);
+                  }
+                  var t = localStorage.getItem("reading-theme");
+                  if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.classList.add("dark");
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-screen flex flex-col bg-parchment text-charcoal font-[family-name:var(--font-lora)]">
-        <ReadingProgress />
-        <ReadingResume />
-        <Header />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <FontSizeProvider>
+          <ReadingProgress />
+          <ReadingResume />
+          <Header />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </FontSizeProvider>
       </body>
     </html>
   );

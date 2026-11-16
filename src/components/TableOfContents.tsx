@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { List, X, ChevronRight, Bookmark, ArrowUp, Type } from "lucide-react";
+import { List, X, ChevronRight, Bookmark, ArrowUp } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { FontSizeControl } from "./FontSizeControl";
 
 export interface TocItem {
   id: string;
@@ -17,7 +18,6 @@ interface TableOfContentsProps {
 export function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [fontSize, setFontSize] = useState<"sm" | "base" | "lg">("base");
 
   const handleScrollSpy = useCallback(() => {
     const headings = items
@@ -70,20 +70,6 @@ export function TableOfContents({ items }: TableOfContentsProps) {
       document.body.style.overflow = "";
     };
   }, [isMobileOpen]);
-
-  // Adjust font size on article element
-  useEffect(() => {
-    const article = document.querySelector("article");
-    if (!article) return;
-    article.classList.remove("text-[0.98rem]", "text-[1.125rem]", "text-[1.25rem]");
-    if (fontSize === "sm") {
-      article.classList.add("text-[0.98rem]");
-    } else if (fontSize === "lg") {
-      article.classList.add("text-[1.25rem]");
-    } else {
-      article.classList.add("text-[1.125rem]");
-    }
-  }, [fontSize]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -147,39 +133,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
           {/* Quick font sizer & Theme Toggle in sidebar header */}
           <div className="flex items-center gap-1.5">
             <ThemeToggle className="scale-90" />
-            <div className="flex items-center border border-border-light rounded bg-parchment p-0.5 text-xs text-navy gap-0.5">
-              <Type className="w-3.5 h-3.5 text-warm-gray ml-1 mr-0.5" />
-              <button
-                onClick={() => setFontSize("sm")}
-                className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[0.7rem] transition-colors cursor-pointer focus-visible:ring-1 focus-visible:ring-cardinal focus:outline-hidden ${
-                  fontSize === "sm" ? "bg-cardinal text-parchment shadow-xs" : "text-charcoal-light hover:text-cardinal hover:bg-parchment-dark/60"
-                }`}
-                title="Cỡ chữ vừa (15px)"
-                aria-label="Cỡ chữ vừa"
-              >
-                A-
-              </button>
-              <button
-                onClick={() => setFontSize("base")}
-                className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[0.75rem] transition-colors cursor-pointer focus-visible:ring-1 focus-visible:ring-cardinal focus:outline-hidden ${
-                  fontSize === "base" ? "bg-cardinal text-parchment shadow-xs" : "text-charcoal-light hover:text-cardinal hover:bg-parchment-dark/60"
-                }`}
-                title="Cỡ chữ chuẩn (18px)"
-                aria-label="Cỡ chữ chuẩn"
-              >
-                A
-              </button>
-              <button
-                onClick={() => setFontSize("lg")}
-                className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[0.75rem] transition-colors cursor-pointer focus-visible:ring-1 focus-visible:ring-cardinal focus:outline-hidden ${
-                  fontSize === "lg" ? "bg-cardinal text-parchment shadow-xs" : "text-charcoal-light hover:text-cardinal hover:bg-parchment-dark/60"
-                }`}
-                title="Cỡ chữ lớn (20px)"
-                aria-label="Cỡ chữ lớn"
-              >
-                A+
-              </button>
-            </div>
+            <FontSizeControl />
           </div>
         </div>
 
@@ -249,14 +203,15 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                 Mục Lục Chuyên Khảo
               </h2>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
+              <FontSizeControl showIcon={false} />
               <ThemeToggle className="scale-90" />
               <button
                 onClick={() => setIsMobileOpen(false)}
-                className="w-10 h-10 rounded-full bg-parchment-dark/80 text-charcoal hover:text-cardinal hover:bg-parchment-dark flex items-center justify-center transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-cardinal focus:outline-hidden"
+                className="w-9 h-9 rounded-full bg-parchment-dark/80 text-charcoal hover:text-cardinal hover:bg-parchment-dark flex items-center justify-center transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-cardinal focus:outline-hidden"
                 aria-label="Đóng mục lục"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           </div>

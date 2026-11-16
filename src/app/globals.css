@@ -53,6 +53,92 @@ html.dark {
   --font-body: var(--font-lora);
 }
 
+/* ==========================================================================
+   Scholarly Reader Font Size System
+   ========================================================================== */
+:root {
+  --reader-font-size: 1.125rem;
+  --reader-line-height: 1.95;
+  --reader-p-margin: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --reader-font-size: 1.05rem;
+    --reader-line-height: 1.85;
+    --reader-p-margin: 1.25rem;
+  }
+}
+
+html[data-font-size="sm"] {
+  --reader-font-size: 0.98rem;
+  --reader-line-height: 1.8;
+}
+@media (max-width: 640px) {
+  html[data-font-size="sm"] {
+    --reader-font-size: 0.925rem;
+    --reader-line-height: 1.75;
+  }
+}
+
+html[data-font-size="base"] {
+  --reader-font-size: 1.125rem;
+  --reader-line-height: 1.95;
+}
+@media (max-width: 640px) {
+  html[data-font-size="base"] {
+    --reader-font-size: 1.05rem;
+    --reader-line-height: 1.85;
+  }
+}
+
+html[data-font-size="lg"] {
+  --reader-font-size: 1.25rem;
+  --reader-line-height: 2.05;
+}
+@media (max-width: 640px) {
+  html[data-font-size="lg"] {
+    --reader-font-size: 1.16rem;
+    --reader-line-height: 1.95;
+  }
+}
+
+html[data-font-size="xl"] {
+  --reader-font-size: 1.38rem;
+  --reader-line-height: 2.15;
+}
+@media (max-width: 640px) {
+  html[data-font-size="xl"] {
+    --reader-font-size: 1.26rem;
+    --reader-line-height: 2.05;
+  }
+}
+
+/* Scholarly Reading Article Elements */
+article.academic-reader {
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+  transition: font-size 0.2s cubic-bezier(0.16, 1, 0.3, 1), line-height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+article.academic-reader p {
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+  transition: font-size 0.2s cubic-bezier(0.16, 1, 0.3, 1), line-height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+article.academic-reader ul li,
+article.academic-reader ol li {
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+  transition: font-size 0.2s cubic-bezier(0.16, 1, 0.3, 1), line-height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+article.academic-reader blockquote p {
+  font-size: calc(var(--reader-font-size) * 1.05);
+  line-height: var(--reader-line-height);
+}
+
 /* Ensure no horizontal overflow on mobile screens without breaking position: sticky */
 html,
 body {
