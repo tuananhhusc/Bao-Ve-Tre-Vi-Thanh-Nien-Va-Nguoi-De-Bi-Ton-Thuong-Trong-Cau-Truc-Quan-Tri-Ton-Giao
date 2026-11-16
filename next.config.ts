@@ -1,9 +1,15 @@
 import type { NextConfig } from "next";
 
+const repoName = "Bao-Ve-Tre-Vi-Thanh-Nien-Va-Nguoi-De-Bi-Ton-Thuong-Trong-Cau-Truc-Quan-Tri-Ton-Giao";
+const isGithubActions = process.env.GITHUB_ACTIONS === "true";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  output: "export",
+  basePath: isGithubActions ? `/${repoName}` : "",
+  assetPrefix: isGithubActions ? `/${repoName}/` : undefined,
+  images: {
+    unoptimized: true,
+  },
   turbopack: {
     rules: {
       "*.css": {

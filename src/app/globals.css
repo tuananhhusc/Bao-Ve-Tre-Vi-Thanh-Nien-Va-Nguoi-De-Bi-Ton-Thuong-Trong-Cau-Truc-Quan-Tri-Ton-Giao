@@ -1,26 +1,328 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --theme-parchment: #F9F7F1;
+  --theme-parchment-dark: #F0EDE4;
+  --theme-cardinal: #8B1A1A;
+  --theme-cardinal-light: #A52A2A;
+  --theme-cardinal-dark: #6B0F0F;
+  --theme-gold: #C5A55A;
+  --theme-gold-light: #D4BA78;
+  --theme-gold-dark: #A68B3E;
+  --theme-navy: #1B2A4A;
+  --theme-navy-light: #2C3E6B;
+  --theme-charcoal: #2D2D2D;
+  --theme-charcoal-light: #4A4A4A;
+  --theme-warm-gray: #6B6560;
+  --theme-border-light: #E4DEC9;
+}
+
+html.dark {
+  --theme-parchment: #121622;
+  --theme-parchment-dark: #1A2133;
+  --theme-cardinal: #E55353;
+  --theme-cardinal-light: #F06A6A;
+  --theme-cardinal-dark: #C93B3B;
+  --theme-gold: #D4BA78;
+  --theme-gold-light: #E8D5A3;
+  --theme-gold-dark: #B8994E;
+  --theme-navy: #E8EEF8;
+  --theme-navy-light: #C5D5EB;
+  --theme-charcoal: #E6DFC8;
+  --theme-charcoal-light: #C4BDB0;
+  --theme-warm-gray: #9E968B;
+  --theme-border-light: #2A344D;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-parchment: var(--theme-parchment);
+  --color-parchment-dark: var(--theme-parchment-dark);
+  --color-cardinal: var(--theme-cardinal);
+  --color-cardinal-light: var(--theme-cardinal-light);
+  --color-cardinal-dark: var(--theme-cardinal-dark);
+  --color-gold: var(--theme-gold);
+  --color-gold-light: var(--theme-gold-light);
+  --color-gold-dark: var(--theme-gold-dark);
+  --color-navy: var(--theme-navy);
+  --color-navy-light: var(--theme-navy-light);
+  --color-charcoal: var(--theme-charcoal);
+  --color-charcoal-light: var(--theme-charcoal-light);
+  --color-warm-gray: var(--theme-warm-gray);
+  --color-border-light: var(--theme-border-light);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-lora);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Ensure no horizontal overflow on mobile screens without breaking position: sticky */
+html,
+body {
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100vw;
+  background: var(--color-parchment);
+  color: var(--color-charcoal);
+  font-family: var(--font-body), Georgia, Cambria, serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Scholarly Headings with balanced wrapping (UI/UX Pro Max rule) */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+/* Smooth scrolling with header offset */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+/* Respect user's motion preference (WCAG & UI/UX Pro Max) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-parchment-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-dark);
+}
+
+/* Scholarly Drop Cap */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 4.2rem;
+  line-height: 0.8;
+  padding-right: 0.65rem;
+  padding-top: 0.25rem;
+  color: var(--color-cardinal);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .drop-cap::first-letter {
+    font-size: 3.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.15rem;
+  }
+}
+
+/* Scholarly Citation Badge */
+.academic-citation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  vertical-align: super;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.12rem 0.32rem;
+  margin: 0 0.12rem;
+  color: var(--color-cardinal);
+  background: rgba(139, 26, 26, 0.08);
+  border: 1px solid rgba(139, 26, 26, 0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  font-family: var(--font-heading), Georgia, serif;
+  box-shadow: 0 1px 2px rgba(139, 26, 26, 0.08);
+  white-space: nowrap;
+}
+
+.academic-citation:hover {
+  background: var(--color-cardinal);
+  color: #F9F7F1;
+  border-color: var(--color-cardinal-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(139, 26, 26, 0.25);
+}
+
+.citation-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-navy);
+  color: #F9F7F1;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  width: max-content;
+  max-width: min(320px, 85vw);
+  z-index: 50;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-body), Georgia, serif;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.citation-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--color-navy) transparent transparent transparent;
+}
+
+.academic-citation:hover .citation-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dark mode adjustments for citations and tooltips */
+html.dark .academic-citation {
+  color: var(--color-cardinal);
+  background: rgba(229, 83, 83, 0.15);
+  border-color: rgba(229, 83, 83, 0.45);
+}
+
+html.dark .academic-citation:hover {
+  background: var(--color-cardinal);
+  color: #FFFFFF;
+}
+
+html.dark .citation-tooltip {
+  background: #1B2234;
+  color: #E6DFC8;
+  border: 1px solid var(--color-gold);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+html.dark .citation-tooltip::after {
+  border-color: #1B2234 transparent transparent transparent;
+}
+
+/* Reference Target Highlight Animation */
+:target {
+  animation: targetHighlight 2.5s ease-out;
+}
+
+@keyframes targetHighlight {
+  0% {
+    background-color: rgba(197, 165, 90, 0.28);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-cardinal), var(--color-gold));
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* Open Academic Table (Oxford / Chicago Manual style) */
+.report-table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: transparent;
+}
+
+.report-table thead th {
+  padding: 0.9rem 1rem;
+  font-family: var(--font-heading), Georgia, serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-navy);
+  text-align: left;
+  border-bottom: 1.5px solid var(--color-gold);
+  background: transparent;
+  letter-spacing: 0.02em;
+}
+
+.report-table tbody td {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  vertical-align: top;
+  background: transparent;
+}
+
+.report-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.report-table tbody tr:hover td {
+  background: rgba(197, 165, 90, 0.05);
+}
+
+/* Section divider ornament */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+}
+
+.ornament::before,
+.ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold-light),
+    transparent
+  );
+}
+
+/* Selection color */
+::selection {
+  background: rgba(139, 26, 26, 0.18);
+  color: var(--color-cardinal-dark);
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+    color: black;
+  }
 }
